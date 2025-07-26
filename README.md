@@ -1,4 +1,4 @@
-# OnCallM Agent (formerly Kubernetes OnCall LLM Agent)
+# OncaLLM Agent
 
 An LLM-powered agent that helps with Kubernetes debugging based on alerts received from monitoring systems.
 
@@ -29,7 +29,7 @@ This application provides an API that can:
 - [Docker](https://docs.docker.com/get-docker/) installed and running.
 - [Kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation) installed.
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) installed and configured.
-- Helm (if OnCallM deployment uses Helm - TBD).
+- Helm (if OncaLLM deployment uses Helm - TBD).
 
 
 ## Installation

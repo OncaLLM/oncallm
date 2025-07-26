@@ -28,17 +28,26 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
-          cache-dependency-path: landing-page/package-lock.json
+          cache-dependency-path: 'landing-page/package-lock.json'
           
-      - name: Install dependencies
+      - name: Install VitePress dependencies
         run: |
           cd landing-page
           npm ci
           
-      - name: Build
+      - name: Build VitePress site
         run: |
           cd landing-page
           npm run build
+          
+      - name: Prepare deployment
+        run: |
+          # Copy build contents to root dist directory
+          mkdir -p dist
+          cp -r landing-page/dist/* ./dist/
+          
+          # Create .nojekyll to ensure GitHub Pages serves all files
+          touch dist/.nojekyll
           
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -46,7 +55,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './landing-page/dist'
+          path: './dist'
 
   deploy:
     environment:

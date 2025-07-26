@@ -1,8 +1,8 @@
-# OnCallM Landing Page
+# OncaLLM Landing Page
 
-A modern, responsive Vue 3 landing page for OnCallM - AI-Powered Kubernetes Alert Analysis tool.
+A modern, responsive Vue 3 landing page for OncaLLM - AI-Powered Kubernetes Alert Analysis tool.
 
-![OnCallM Banner](https://via.placeholder.com/800x400/3B82F6/FFFFFF?text=OnCallM+-+AI-Powered+Kubernetes+Alert+Analysis)
+![OncaLLM Banner](https://via.placeholder.com/800x400/3B82F6/FFFFFF?text=OncaLLM+-+AI-Powered+Kubernetes+Alert+Analysis)
 
 ## 🚀 Features
 
@@ -67,7 +67,7 @@ npm run preview
 ```
 landing-page/
 ├── public/
-│   └── favicon.svg          # OnCallM favicon
+│   └── favicon.svg          # OncaLLM favicon
 ├── src/
 │   ├── App.vue              # Main landing page component
 │   └── main.js              # Vue app entry point
@@ -90,7 +90,7 @@ landing-page/
 - **Six key features** with beautiful gradient cards
 - **Hover animations** for interactive experience
 - **SVG icons** for each feature
-- **Benefits-focused content** highlighting OnCallM's value
+- **Benefits-focused content** highlighting OncaLLM's value
 
 ### How It Works
 - **Three-step process** explanation
@@ -197,7 +197,7 @@ MIT License - see the LICENSE file for details.
 
 For questions or support:
 - Open an issue in the repository
-- Contact the OnCallM team
+- Contact the OncaLLM team
 - Check the main project documentation
 
 ---
