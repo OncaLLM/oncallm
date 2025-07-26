@@ -1,0 +1,22 @@
+# prometheusrule-eviction.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: pod-eviction-rules
+  namespace: monitoring
+  labels:
+    role: alert-rules
+spec:
+  groups:
+  - name: pod-eviction.rules
+    rules:
+    - alert: PodEvicted
+      expr: kube_pod_status_reason{reason="Evicted"} == 1
+      for: 1m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Pod {{$labels.namespace}}/{{$labels.pod}} was evicted"
+        description: |
+          Pod {{$labels.namespace}}/{{$labels.pod}} has been evicted  
+          due to resource pressure (e.g., disk or memory).

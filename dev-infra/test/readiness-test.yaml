@@ -1,0 +1,18 @@
+# readiness-failure-test.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: readiness-test-pod
+  namespace: monitoring
+  labels:
+    app: readiness-demo
+spec:
+  containers:
+    - name: never-ready
+      image: busybox:1.35
+      command: ["sh", "-c", "sleep 3600"]
+      readinessProbe:
+        exec:
+          command: ["false"]
+        initialDelaySeconds: 5
+        periodSeconds: 5

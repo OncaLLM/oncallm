@@ -1,0 +1,30 @@
+alertmanager:
+  config:
+    global:
+      resolve_timeout: 5s
+    route:
+      receiver: "oncallm-webhook"
+      group_by: ["alertname", "namespace"]
+      group_wait: 1s
+      group_interval: 1s
+      repeat_interval: 10m
+      routes:
+        - matchers:
+            - alertname =~ "(.*)"
+          receiver: "oncallm-webhook"
+          continue: true
+    receivers:
+      - name: "oncallm-webhook"
+        webhook_configs:
+        - url: "http://oncallm.monitoring.svc.cluster.local:8001/webhook"
+
+# Tell Prometheus to pick up our custom rule CRDs (below)
+prometheus:
+  prometheusSpec:
+    ruleSelectorNilUsesHelmValues: false
+    ruleSelector:
+      matchLabels:
+        role: alert-rules
+
+# OnCallM configuration
+oncallmBaseUrl: "https://oncallm.yourcompany.com"  # Update this to your OnCallM URL

@@ -1,0 +1,49 @@
+# Default values for the oncallm Helm chart.
+# Docker image configuration
+image:
+  repository: "oncallm"
+  tag: ""
+  pullPolicy: "IfNotPresent"
+
+# Non-secret environment variables (will be placed in a ConfigMap)
+appHost: "0.0.0.0"
+appPort: 8001
+
+# OnCallM specific configuration
+oncallmBaseUrl: "http://localhost:8001"  # Update for production deployment
+
+# LLM configuration
+llmModel: "gpt-4o-mini"
+llmApiBase: ""  # Optional: for alternative LLM providers
+
+# Secret variables (will be placed in a Secret)
+openaiApiKey: ""
+langfusePublicKey: ""
+langfuseSecretKey: ""
+langfuseHost: ""
+
+replicaCount: 1
+
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+service:
+  type: ClusterIP
+  port: 8001

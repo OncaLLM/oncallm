@@ -1,0 +1,21 @@
+.idea/**
+.env
+.venv
+.DS_Store
+.vscode
+.pytest_cache
+.ruff_cache
+.mypy_cache
+.history/*
+.history/.*
+venv/
+
+# Python bytecode and cache files
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+*.py[cod]
+*$py.class
+
+charts/oncallm/values.local.yaml

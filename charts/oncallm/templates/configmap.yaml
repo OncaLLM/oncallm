@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "oncallm.fullname" . }}
+  labels:
+    {{- include "oncallm.labels" . | nindent 4 }}
+
+data:
+  APP_HOST: {{ .Values.appHost | quote }}
+  APP_PORT: {{ .Values.appPort | quote }}
+  ONCALLM_BASE_URL: {{ .Values.oncallmBaseUrl | quote }}
+  LLM_MODEL: {{ .Values.llmModel | quote }}
+  {{- if .Values.llmApiBase }}
+  LLM_API_BASE: {{ .Values.llmApiBase | quote }}
+  {{- end }}
+  {{- if .Values.langfuseHost }}
+  LANGFUSE_HOST: {{ .Values.langfuseHost | quote }}
+  {{- end }}

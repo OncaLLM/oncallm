@@ -1,0 +1,26 @@
+# -------------------------------------------------------------------
+# 2) PrometheusRule to alert on Pods Pending >10m
+#    (for Prometheus Operator)
+# -------------------------------------------------------------------
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: pod-pending-rules
+  namespace: monitoring
+  labels:
+    role: alert-rules
+spec:
+  groups:
+  - name: pod-pending.rules
+    rules:
+    - alert: PodPendingTooLong
+      expr: kube_pod_status_phase{phase="Pending"} == 1
+      # only fire if the Pod has been in Pending for more than 1 minutes
+      for: 1m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Pod {{$labels.namespace}}/{{$labels.pod}} pending > 1m"
+        description: |
+          Pod {{$labels.namespace}}/{{$labels.pod}} has been in Pending  
+          state for more than 1 minutes.

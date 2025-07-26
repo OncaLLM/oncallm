@@ -1,0 +1,57 @@
+{
+  "version": "4",
+  "groupKey": "{}:{alertname=\"PodCrashLooping\", namespace=\"default\"}",
+  "status": "firing",
+  "receiver": "webhook",
+  "groupLabels": {
+    "alertname": "PodCrashLooping",
+    "namespace": "default"
+  },
+  "commonLabels": {
+    "alertname": "PodCrashLooping",
+    "container": "oncall-llm-agent",
+    "endpoint": "http",
+    "instance": "10.244.0.50:8080",
+    "job": "kube-state-metrics",
+    "namespace": "default",
+    "pod": "oncall-llm-agent-c4dc76b7b-bzdqz",
+    "prometheus": "monitoring/kube-prom-kube-prometheus-prometheus",
+    "reason": "CrashLoopBackOff",
+    "service": "oncall-llm-agent",
+    "severity": "critical",
+    "uid": "a1b2c3d4-e5f6-7890-abcd-123456789012"
+  },
+  "commonAnnotations": {
+    "description": "Pod oncall-llm-agent-c4dc76b7b-bzdqz in namespace default is crash looping.",
+    "summary": "Pod default/oncall-llm-agent-c4dc76b7b-bzdqz is crash looping"
+  },
+  "externalURL": "http://kube-prom-kube-prometheus-alertmanager.monitoring:9093",
+  "alerts": [
+    {
+      "status": "firing",
+      "labels": {
+        "alertname": "PodCrashLooping",
+        "container": "oncall-llm-agent",
+        "endpoint": "http",
+        "instance": "10.244.0.50:8080",
+        "job": "kube-state-metrics",
+        "namespace": "default",
+        "pod": "oncall-llm-agent-c4dc76b7b-bzdqz",
+        "prometheus": "monitoring/kube-prom-kube-prometheus-prometheus",
+        "reason": "CrashLoopBackOff",
+        "service": "oncall-llm-agent",
+        "severity": "critical",
+        "uid": "a1b2c3d4-e5f6-7890-abcd-123456789012"
+      },
+      "annotations": {
+        "description": "The pod has been restarting frequently and is in CrashLoopBackOff state",
+        "summary": "Pod oncall-llm-agent-c4dc76b7b-bzdqz is crash looping"
+      },
+      "startsAt": "2025-01-29T10:00:00Z",
+      "endsAt": "0001-01-01T00:00:00Z",
+      "generatorURL": "http://kube-prom-kube-prometheus-prometheus.monitoring:9090/graph?g0.expr=kube_pod_container_status_restarts_total%7Bnamespace%3D%22default%22%7D+%3E+5&g0.tab=1",
+      "fingerprint": "test123"
+    }
+  ],
+  "truncatedAlerts": 0
+}

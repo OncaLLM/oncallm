@@ -1,0 +1,29 @@
+# eviction-test.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: eviction-test-pod
+  namespace: monitoring
+spec:
+  restartPolicy: Never
+  containers:
+    - name: disk-hog
+      image: busybox:1.35
+      command:
+        - sh
+        - -c
+        - |
+          # write 10Mi into a 1Mi limit → eviction
+          dd if=/dev/zero of=/data/file bs=1M count=10
+          sleep 60
+      resources:
+        requests:
+          ephemeral-storage: "1Mi"
+        limits:
+          ephemeral-storage: "1Mi"
+      volumeMounts:
+        - name: workdir
+          mountPath: /data
+  volumes:
+    - name: workdir
+      emptyDir: {}

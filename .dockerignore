@@ -1,0 +1,45 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+.venv*
+pip-selfcheck.json
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Docker
+.dockerignore
+Dockerfile # If you have multiple Dockerfiles and want to ignore some
+oncallm.Dockerfile # It will be part of the context, but good to list if copying WORKDIR
+
+# Tests and scripts (unless specifically needed in image)
+tests/
+scripts/
+
+# IDE settings
+.idea/
+.vscode/
+*.swp
+*~
+
+# Other
+*.log
+*.db
+*.sqlite3
+*.env
+requirements.txt.full_original
+*.md # READMEs, etc., unless needed in the image
+# Helm charts (not needed in app image)
+charts/
+helmfile.yaml
+build.sh
+# Client examples or test data not for runtime
+client_example.py
+test_alert.json
+test_debug_request.json
+test_openai_key.py

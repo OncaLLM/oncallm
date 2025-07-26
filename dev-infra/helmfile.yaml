@@ -1,0 +1,51 @@
+repositories:
+  - name: prometheus-community
+    url: https://prometheus-community.github.io/helm-charts
+
+releases:
+  # Deploy Prometheus for monitoring.
+  - name: prometheus
+    namespace: monitoring
+    createNamespace: true
+    chart: prometheus-community/prometheus
+    version: 25.13.0
+    values:
+      - server:
+          persistentVolume:
+            enabled: false
+        alertmanager:
+          persistentVolume:
+            enabled: false
+          config:
+            route:
+              receiver: 'oncallm-agent'
+              group_wait: 10s
+              group_interval: 1m
+              repeat_interval: 3h
+            receivers:
+              - name: 'oncallm-agent'
+                webhook_configs:
+                  - url: 'http://oncallm.default.svc.cluster.local:8001/webhook'
+                    send_resolved: true
+
+  # Deploy our OnCallM Agent.
+  - name: oncallm
+    namespace: default
+    chart: ./charts/oncallm
+    values:
+      - image:
+          repository: oncallm
+          tag: "1.0.0"
+          pullPolicy: IfNotPresent
+        
+        # Application configuration
+        appHost: "0.0.0.0"
+        appPort: 8001
+        llmModel: "gpt-4.1"
+        llmApiBase: ""  # Optional: for alternative providers
+        
+        # Secret values (base64 encoded by chart)
+        openaiApiKey: '{{ requiredEnv "OPENAI_API_KEY" }}'
+        langfusePublicKey: '{{ env "LANGFUSE_PUBLIC_KEY" | default "" }}'
+        langfuseSecretKey: '{{ env "LANGFUSE_SECRET_KEY" | default "" }}'
+        langfuseHost: '{{ env "LANGFUSE_HOST" | default "" }}'

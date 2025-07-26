@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+pandas
+requests
+streamlit
+kubernetes
+langchain
+langchain-openai
+langchain-core
+langgraph
+langfuse
+pydantic
+python-dotenv
+openai
+pytest

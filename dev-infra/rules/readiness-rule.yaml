@@ -1,0 +1,22 @@
+# prometheusrule-readiness.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: pod-readiness-rules
+  namespace: monitoring
+  labels:
+    role: alert-rules
+spec:
+  groups:
+  - name: pod-readiness.rules
+    rules:
+    - alert: PodNotReadyLong
+      expr: kube_pod_status_ready{condition="false"} == 1
+      for: 1m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Pod {{$labels.namespace}}/{{$labels.pod}} has not become Ready"
+        description: |
+          Pod {{$labels.namespace}}/{{$labels.pod}} has been reporting  
+          NotReady for over 10 minutes.
