@@ -1,0 +1,27 @@
+{
+  "name": "oncallm-landing",
+  "version": "1.0.0",
+  "description": "OnCallM - AI-Powered Kubernetes Alert Analysis Landing Page",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "generate": "vite build --mode static",
+    "deploy": "npm run build && gh-pages -d dist",
+    "predeploy": "npm run build"
+  },
+  "dependencies": {
+    "vue": "^3.4.21"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.4",
+    "gh-pages": "^6.1.1",
+    "vite": "^5.2.8",
+    "vite-plugin-windicss": "^1.9.3",
+    "windicss": "^3.5.6"
+  },
+  "keywords": ["kubernetes", "ai", "alerts", "monitoring", "oncall", "devops"],
+  "author": "OnCallM Team",
+  "license": "MIT",
+  "homepage": "https://oncallm.github.io/oncallm"
+}
