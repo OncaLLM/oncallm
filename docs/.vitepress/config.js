@@ -33,7 +33,7 @@ module.exports = {
       { 
         text: 'Links',
         items: [
-          { text: 'GitHub Repository', link: 'https://github.com/mmdaz/oncallm' },
+          { text: 'GitHub Repository', link: 'https://github.com/oncallm/oncallm' },
           { text: 'Enterprise Contact', link: 'mailto:mohammad.azhdari.22@gmail.com' }
         ]
       }
@@ -80,7 +80,7 @@ module.exports = {
     },
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/mmdaz/oncallm' }
+      { icon: 'github', link: 'https://github.com/oncallm/oncallm' }
     ],
 
     footer: {
@@ -89,7 +89,7 @@ module.exports = {
     },
 
     editLink: {
-      pattern: 'https://github.com/mmdaz/oncallm/edit/main/docs/:path',
+      pattern: 'https://github.com/oncallm/oncallm/edit/main/docs/:path',
       text: 'Edit this page on GitHub'
     },
 
