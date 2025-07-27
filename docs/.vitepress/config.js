@@ -85,7 +85,7 @@ module.exports = {
 
     footer: {
       message: 'Released under the MIT License.',
-      copyright: 'Copyright © 2024 OncaLLM Team'
+      copyright: 'Copyright © 2025 OncaLLM Team'
     },
 
     editLink: {
