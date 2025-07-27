@@ -119,5 +119,9 @@ yarn-error.log*
 .vite/
 logs
 
+# VitePress cache
+docs/.vitepress/cache/
+docs/.vitepress/dist/
+
 # Project specific
 charts/oncallm/values.local.yaml
