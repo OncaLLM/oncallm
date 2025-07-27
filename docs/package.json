@@ -1,0 +1,16 @@
+{
+  "name": "oncallm-docs",
+  "version": "1.0.0",
+  "description": "OncaLLM Documentation and Landing Page",
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
+  },
+  "devDependencies": {
+    "vitepress": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+} 

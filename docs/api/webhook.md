@@ -252,7 +252,7 @@ curl http://localhost:8001/health
 
 Combine OnCallM with Slack notifications:
 
-```yaml
+<pre><code class="language-yaml">
 receivers:
 - name: 'oncallm-and-slack'
   webhook_configs:
@@ -260,9 +260,9 @@ receivers:
   slack_configs:
   - api_url: 'YOUR_SLACK_WEBHOOK'
     channel: '#alerts'
-    title: 'Alert: {{ .GroupLabels.alertname }}'
-    text: 'AI Analysis: http://oncallm:8001/report/{{ .Alerts.0.Fingerprint }}'
-```
+    title: 'Alert: &#123;&#123; .GroupLabels.alertname &#125;&#125;'
+    text: 'AI Analysis: http://oncallm:8001/report/&#123;&#123; .Alerts.0.Fingerprint &#125;&#125;'
+</code></pre>
 
 ### PagerDuty Integration
 

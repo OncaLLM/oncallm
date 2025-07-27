@@ -337,7 +337,7 @@ groups:
       severity: warning
     annotations:
       summary: "OnCallM memory usage is high"
-      description: "Pod {{ $labels.pod }} memory usage is {{ $value | humanizePercentage }}"
+      description: "Pod &#123;&#123; $labels.pod &#125;&#125; memory usage is &#123;&#123; $value | humanizePercentage &#125;&#125;"
 
   - alert: OnCallMHighCPUUsage
     expr: |
@@ -347,7 +347,7 @@ groups:
       severity: warning
     annotations:
       summary: "OnCallM CPU usage is high"
-      description: "Pod {{ $labels.pod }} CPU usage is {{ $value | humanize }}"
+      description: "Pod &#123;&#123; $labels.pod &#125;&#125; CPU usage is &#123;&#123; $value | humanize &#125;&#125;"
 ```
 
 ## Performance Tuning

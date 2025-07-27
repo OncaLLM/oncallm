@@ -74,13 +74,13 @@ receivers:
   webhook_configs:
   - url: 'http://oncallm.default.svc.cluster.local:8001/webhook'
     send_resolved: true
-    title: 'Critical Alert - {{ .GroupLabels.alertname }}'
+    title: 'Critical Alert - &#123;&#123; .GroupLabels.alertname &#125;&#125;'
 
 - name: 'oncallm-warning'
   webhook_configs:
   - url: 'http://oncallm.default.svc.cluster.local:8001/webhook'
     send_resolved: true
-    title: 'Warning Alert - {{ .GroupLabels.alertname }}'
+    title: 'Warning Alert - &#123;&#123; .GroupLabels.alertname &#125;&#125;'
 ```
 
 ### Route by Namespace
