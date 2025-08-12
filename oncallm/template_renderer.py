@@ -6,17 +6,25 @@ for different alert report states (processing, failed, completed).
 
 from pathlib import Path
 from typing import Any, Dict
-
+import os
 
 class TemplateRenderer:
     """Renders HTML templates with data substitution."""
     
-    def __init__(self, template_dir: str = "templates") -> None:
+    def __init__(self, template_dir: str = None) -> None:
         """Initialize the template renderer.
         
         Args:
-            template_dir: Directory containing HTML templates.
+            template_dir: Directory containing HTML templates. If None, uses
+                         TEMPLATE_DIR env var or defaults to project root/templates.
         """
+        if template_dir is None:
+            template_dir = os.getenv("TEMPLATE_DIR")
+            if template_dir is None:
+                # Default to project root templates directory
+                base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+                template_dir = os.path.join(base_dir, "templates")
+        
         self.template_dir = Path(template_dir)
         if not self.template_dir.exists():
             raise FileNotFoundError(f"Template directory not found: {template_dir}")

@@ -2,7 +2,6 @@ from datetime import datetime
 from typing import Optional, Any, Literal
 from pydantic import BaseModel, Field
 
-
 class AlertLabel(BaseModel):
     alertname: str
     namespace: str
@@ -11,12 +10,10 @@ class AlertLabel(BaseModel):
     severity: Optional[str] = None
     instance: Optional[str] = None
 
-
 class AlertAnnotation(BaseModel):
     summary: Optional[str] = None
     description: Optional[str] = None
     message: Optional[str] = None
-
 
 class Alert(BaseModel):
     status: str
@@ -30,7 +27,6 @@ class Alert(BaseModel):
     class Config:
         json_encoders = {datetime: lambda v: v.isoformat() if v else None}
 
-
 class AlertGroup(BaseModel):
     version: str
     groupKey: str
@@ -43,11 +39,9 @@ class AlertGroup(BaseModel):
     externalURL: str
     alerts: list[Alert]
 
-
 class DebugRequest(BaseModel):
     alert_group: AlertGroup = Field(..., description="Alert group from Alertmanager")
     kubeconfig: Optional[str] = Field(None, description="Optional kubeconfig data if not using the default")
-
 
 class DebuggingStep(BaseModel):
     step_id: int
@@ -58,7 +52,6 @@ class DebuggingStep(BaseModel):
 
     class Config:
         json_encoders = {datetime: lambda v: v.isoformat() if v else None}
-
 
 class DebugReport(BaseModel):
     alert_id: str

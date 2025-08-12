@@ -22,7 +22,6 @@ from oncallm.llm_service import OncallmAgent
 from oncallm.health_routes import router as health_router
 from oncallm.template_renderer import TemplateRenderer
 
-
 load_dotenv()
 
 # Configure logging to enable INFO level.
@@ -45,7 +44,6 @@ _template_renderer: Optional[TemplateRenderer] = None
 # Global agent instance to be initialized once at startup.
 _agent: Optional[OncallmAgent] = None
 
-
 @asynccontextmanager
 async def _lifespan(app: FastAPI):
     """FastAPI lifespan context manager to initialize and tear down resources.
@@ -59,7 +57,7 @@ async def _lifespan(app: FastAPI):
     global _alert_queue, _executor, _template_renderer, _agent
     _alert_queue = asyncio.Queue()
     _executor = ThreadPoolExecutor(max_workers=10)
-    _template_renderer = TemplateRenderer(os.getenv("TEMPLATE_DIR", "../templates"))
+    _template_renderer = TemplateRenderer()
     
     # Initialize the agent once at startup to avoid expensive initialization
     # for every alert processing.
@@ -75,7 +73,6 @@ async def _lifespan(app: FastAPI):
     if _executor:
         _executor.shutdown(wait=False, cancel_futures=True)
 
-
 app = FastAPI(
     title="OnCallM - Kubernetes Alert Analysis",
     description="AI-powered Kubernetes alert analysis and root cause detection",
@@ -84,7 +81,6 @@ app = FastAPI(
 )
 
 app.include_router(health_router)
-
 
 @app.get("/")
 async def root() -> Dict[str, Any]:
@@ -104,7 +100,6 @@ async def root() -> Dict[str, Any]:
             "GET /report/{fingerprint} - View HTML report page"
         ]
     }
-
 
 async def _process_alerts_worker(
     queue: asyncio.Queue, 
@@ -135,7 +130,6 @@ async def _process_alerts_worker(
             break
         except Exception as e:
             _logger.error("Error processing alert: %s", e)
-
 
 def _process_alert(alert_fingerprint: str, alert_group: AlertGroup) -> None:
     """Process a single alert and store the analysis.
@@ -171,7 +165,6 @@ def _process_alert(alert_fingerprint: str, alert_group: AlertGroup) -> None:
             "created_at": alert_group.alerts[0].startsAt.isoformat(),
             "fingerprint": alert_fingerprint
         }
-
 
 @app.post("/webhook", response_model=Dict[str, Any])
 async def webhook(alert_group: AlertGroup) -> Dict[str, Any]:
@@ -220,7 +213,6 @@ async def webhook(alert_group: AlertGroup) -> Dict[str, Any]:
         "message": "Alerts queued for analysis",
         "report_urls": report_urls
     }
-
 
 @app.get("/report/{fingerprint}", response_class=HTMLResponse)
 async def get_alert_report(fingerprint: str) -> str:
@@ -272,7 +264,6 @@ def _generate_report_html(fingerprint: str, report: Dict[str, Any]) -> str:
             fingerprint, alert_info, analysis, created_at
         )
 
-
 def _extract_alert_info(alert_group: Dict[str, Any]) -> Dict[str, str]:
     """Extract alert information from alert group.
     
@@ -305,7 +296,6 @@ def _extract_alert_info(alert_group: Dict[str, Any]) -> Dict[str, str]:
         }
     return alert_info
 
-
 @app.get("/reports")
 async def list_reports() -> Dict[str, List[Dict[str, str]]]:
     """List all available reports.
@@ -324,7 +314,6 @@ async def list_reports() -> Dict[str, List[Dict[str, str]]]:
         ]
           }
 
-
 def main() -> None:
     """Main function to run the application."""
     # Use environment variables for configuration.
@@ -332,7 +321,6 @@ def main() -> None:
     port = int(os.getenv("APP_PORT", "8001"))
     
     uvicorn.run(app, host=host, port=port)
-
 
 if __name__ == "__main__":
     main()
