@@ -2,7 +2,7 @@
 
 Purpose
 
-- Make OncallM a reliable on-call AI copilot that triages alerts, inspects Kubernetes signals (resources, events, logs, metrics), summarizes likely root cause, and proposes safe, auditable remediations. Optimized for a link-first workflow: Alertmanager (and other notifiers) include links to the OncallM web UI for each alert; optional ChatOps integrations can come later. Supports authenticated deep-links via SSO/SAML/OIDC.
+- Make OncallM a reliable on-call AI copilot that triages alerts, inspects Kubernetes signals (resources, events, logs, metrics), summarizes likely root cause, and proposes safe, auditable remediations. Optimized for a link-first workflow: Alertmanager (and other notifiers) include links to the OncallM web UI for each alert; optional ChatOps integrations can come later. Supports authenticated deep-links via SSO/SAML/OIDC. Emphasizes low-cost local LLM support for development and testing.
 
 Versioning and planning
 
@@ -18,6 +18,7 @@ Goals
 - Improve typing, docstrings, and error handling across services.
 - Unify configuration via environment variables with sane defaults.
 - Optional: streaming responses for LLM output.
+- LLM provider abstraction with Local LLM dev mode (OpenAI-compatible endpoint) to enable low-cost development and testing.
 DoD
 - [ ] Endpoints return structured errors and consistent JSON.
 - [ ] Type checks and lints pass in CI; essential unit tests added.
@@ -40,14 +41,14 @@ DoD
 0.3 – Link-first workflow expansion
 Goals
 
-- LLM provider abstraction and at least one alternative provider implementation.
+- Cloud LLM provider driver (e.g., OpenAI/Azure/Anthropic) added on top of the provider abstraction (local dev mode remains default for development).
 - Link-first alert deep-links: canonical URL scheme `/alerts/{alert_id}` that renders triage status and results.
 - Alertmanager template examples and a small helper to include the alert link in notifications.
 - Optional signed links or per-alert tokens to protect access; config toggles for public vs. protected links.
 - Basic SSO for the UI (SAML or OIDC), including minimal role mapping (viewer/admin) and per-alert access control options.
 - Metrics providers: interface for Prometheus first.
 DoD
-- [ ] Provider switch via config; second LLM provider works end-to-end.
+- [ ] Cloud LLM provider works end-to-end via config toggle alongside local dev provider.
 - [ ] Alert deep-link renders triage page end-to-end from a notification link.
 - [ ] Alertmanager template snippet documented and covered by an example test.
 - [ ] Signed link/token option implemented and tested.
