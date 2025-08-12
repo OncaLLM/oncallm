@@ -130,4 +130,10 @@ Ensure you have installed the necessary dependencies, including `pytest` from `r
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+We welcome contributions!
+
+- Please read the project roadmap to understand priorities and milestones: [ROADMAP.md](./ROADMAP.md).
+- Coding style: follow the [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html) in codes.
+- Simplicity first: prefer clear, minimal solutions and small, focused PRs.
+
+Please feel free to submit a Pull Request.
